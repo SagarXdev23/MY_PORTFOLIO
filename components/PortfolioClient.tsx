@@ -686,7 +686,7 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
 
                     <div className="d-flex w-100">
                       <a 
-                        href={`/assets/${cert.filename}`} 
+                        href={`/assets/${encodeURIComponent(cert.filename)}`} 
                         target="_blank" 
                         rel="noreferrer"
                         className="btn btn-sm btn-gradient fw-bold d-flex align-items-center justify-content-center gap-1.5 w-100 py-2.5"
