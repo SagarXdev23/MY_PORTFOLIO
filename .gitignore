@@ -42,3 +42,5 @@ next-env.d.ts
 
 # secrets
 assets/key.txt
+public/assets/key.txt
+public/assets/FORMSPREE.txt

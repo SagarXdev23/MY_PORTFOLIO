@@ -105,11 +105,11 @@ const SKILL_CATEGORIES = [
 
 const CERTIFICATES = [
   {
-    title: 'Google Cybersecurity Professional',
-    issuer: 'Google',
-    filename: 'Cybersecurity.pdf',
-    skills: ['Network Security', 'Threat Detection', 'Linux', 'SQL', 'Python'],
-    date: '2025'
+    title: 'Excel Certification',
+    issuer: 'Coursera',
+    filename: 'excel.pdf',
+    skills: ['Spreadsheets', 'Data Analysis', 'Formulas', 'Data Visualization'],
+    date: '2024'
   },
   {
     title: 'Google Generative AI Specialist',
