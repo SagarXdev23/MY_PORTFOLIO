@@ -63,42 +63,19 @@ export default function ProjectModal({
   if (!isOpen) return null;
 
   return (
-    <div 
-      className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center px-3"
-      style={{
-        zIndex: 1050,
-        background: 'rgba(3, 4, 9, 0.85)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)'
-      }}
-    >
-      <div 
-        className="glass-panel w-100 d-flex flex-column"
-        style={{
-          maxWidth: '850px',
-          height: '80vh',
-          maxHeight: '900px',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-        }}
-      >
+    <div className="modal-underlay">
+      <div className="glass-panel modal-container">
         {/* Modal Header */}
-        <div 
-          className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom"
-          style={{
-            borderColor: 'rgba(255, 255, 255, 0.08)',
-            background: 'rgba(13, 20, 38, 0.6)'
-          }}
-        >
+        <div className="modal-header-custom">
           <div>
             <h5 className="m-0 fw-bold text-gradient d-flex align-items-center gap-2">
               {repoName}
             </h5>
             <div className="d-flex align-items-center gap-3 mt-1" style={{ fontSize: '12px' }}>
-              <span className="text-white text-opacity-50 d-flex align-items-center gap-1">
+              <span className="text-foreground-muted d-flex align-items-center gap-1">
                 <Star size={12} className="text-warning" /> {stars}
               </span>
-              <span className="text-white text-opacity-50 d-flex align-items-center gap-1">
+              <span className="text-foreground-muted d-flex align-items-center gap-1">
                 <GitFork size={12} className="text-cyan-400" /> {forks}
               </span>
             </div>
@@ -106,7 +83,8 @@ export default function ProjectModal({
           <div className="d-flex align-items-center gap-2">
             <button 
               onClick={() => fetchReadme(true)}
-              className="btn btn-sm btn-outline-secondary text-white text-opacity-60 border-0 p-2 d-flex align-items-center justify-content-center"
+              className="btn btn-sm btn-custom-outline border-0 p-2 d-flex align-items-center justify-content-center"
+              style={{ borderRadius: '50%' }}
               title="Force Refresh README"
               disabled={loading}
             >
@@ -114,7 +92,8 @@ export default function ProjectModal({
             </button>
             <button 
               onClick={onClose}
-              className="btn btn-sm btn-outline-secondary text-white text-opacity-60 border-0 p-2 d-flex align-items-center justify-content-center"
+              className="btn btn-sm btn-custom-outline border-0 p-2 d-flex align-items-center justify-content-center"
+              style={{ borderRadius: '50%' }}
             >
               <X size={20} />
             </button>
@@ -122,23 +101,18 @@ export default function ProjectModal({
         </div>
 
         {/* Modal Body */}
-        <div 
-          className="flex-grow-1 p-4 overflow-y-auto text-white text-opacity-90"
-          style={{
-            background: 'rgba(4, 6, 15, 0.35)',
-          }}
-        >
+        <div className="modal-body-custom">
           {loading ? (
             <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-3">
               <div className="spinner-border text-success" role="status" style={{ width: '3rem', height: '3rem' }}>
                 <span className="visually-hidden">Loading...</span>
               </div>
-              <span className="text-white text-opacity-50">Fetching project documentation...</span>
+              <span className="text-foreground-muted">Fetching project documentation...</span>
             </div>
           ) : error ? (
             <div className="d-flex flex-column align-items-center justify-content-center h-100 text-center gap-3">
               <span className="text-danger fw-semibold">{error}</span>
-              <button onClick={() => fetchReadme()} className="btn btn-success btn-sm">
+              <button onClick={() => fetchReadme()} className="btn btn-gradient btn-sm px-3 py-2 fw-semibold" style={{ borderRadius: '8px' }}>
                 Try Again
               </button>
             </div>
@@ -155,19 +129,13 @@ export default function ProjectModal({
         </div>
 
         {/* Modal Footer */}
-        <div 
-          className="d-flex justify-content-end gap-3 px-4 py-3 border-top"
-          style={{
-            borderColor: 'rgba(255, 255, 255, 0.08)',
-            background: 'rgba(13, 20, 38, 0.6)'
-          }}
-        >
+        <div className="modal-footer-custom">
           {homepage && (
             <a 
               href={homepage} 
               target="_blank" 
               rel="noreferrer"
-              className="btn btn-sm btn-outline-success d-flex align-items-center gap-1 hover:text-white px-3"
+              className="btn btn-sm btn-custom-outline d-flex align-items-center gap-1 px-3"
             >
               <ExternalLink size={14} /> Live Demo
             </a>
@@ -177,11 +145,8 @@ export default function ProjectModal({
               href={htmlUrl} 
               target="_blank" 
               rel="noreferrer"
-              className="btn btn-sm btn-success d-flex align-items-center gap-1 text-black px-3 fw-semibold"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
-                border: 'none'
-              }}
+              className="btn btn-sm btn-gradient d-flex align-items-center gap-1 px-3 fw-semibold"
+              style={{ borderRadius: '8px' }}
             >
               <ExternalLink size={14} /> View GitHub
             </a>
@@ -194,30 +159,30 @@ export default function ProjectModal({
         .readme-content h1, 
         .readme-content h2, 
         .readme-content h3 {
-          color: #fff;
+          color: hsl(var(--foreground));
           margin-top: 1.5rem;
           margin-bottom: 0.8rem;
           font-weight: 700;
         }
-        .readme-content h1 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; }
-        .readme-content h2 { font-size: 1.3rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.3rem; }
+        .readme-content h1 { font-size: 1.6rem; border-bottom: 1px solid hsl(var(--border) / 0.5); padding-bottom: 0.5rem; }
+        .readme-content h2 { font-size: 1.3rem; border-bottom: 1px solid hsl(var(--border) / 0.3); padding-bottom: 0.3rem; }
         .readme-content h3 { font-size: 1.1rem; }
         
         .readme-content p {
           margin-bottom: 1rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: hsl(var(--foreground) / 0.85);
         }
         
         .readme-content a {
-          color: #10b981;
+          color: hsl(var(--primary));
           text-decoration: underline !important;
         }
         .readme-content a:hover {
-          color: #06b6d4;
+          color: hsl(var(--accent));
         }
         
         .readme-content code {
-          background: rgba(255,255,255,0.07);
+          background: hsl(var(--bg-secondary) / 0.8);
           padding: 0.15rem 0.4rem;
           border-radius: 4px;
           font-family: var(--font-geist-mono);
@@ -226,8 +191,8 @@ export default function ProjectModal({
         }
         
         .readme-content pre {
-          background: rgba(13, 20, 38, 0.7);
-          border: 1px solid rgba(255,255,255,0.05);
+          background: hsl(var(--bg-tertiary) / 0.4);
+          border: 1px solid hsl(var(--border) / 0.8);
           border-radius: 8px;
           padding: 1rem;
           overflow-x: auto;
@@ -236,7 +201,7 @@ export default function ProjectModal({
         .readme-content pre code {
           background: transparent;
           padding: 0;
-          color: #e2e8f0;
+          color: hsl(var(--foreground));
           font-size: 0.9em;
         }
         
@@ -244,16 +209,16 @@ export default function ProjectModal({
         .readme-content ol {
           margin-bottom: 1rem;
           padding-left: 1.5rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: hsl(var(--foreground) / 0.85);
         }
         .readme-content li {
           margin-bottom: 0.3rem;
         }
         
         .readme-content blockquote {
-          border-left: 4px solid #10b981;
+          border-left: 4px solid hsl(var(--primary));
           padding-left: 1rem;
-          color: rgba(255, 255, 255, 0.6);
+          color: hsl(var(--foreground-muted));
           margin-bottom: 1rem;
           font-style: italic;
         }
@@ -262,7 +227,7 @@ export default function ProjectModal({
           max-width: 100%;
           border-radius: 6px;
           margin: 1rem 0;
-          border: 1px solid rgba(255,255,255,0.05);
+          border: 1px solid hsl(var(--border) / 0.5);
         }
         
         .readme-content table {
@@ -272,12 +237,12 @@ export default function ProjectModal({
         }
         .readme-content th, 
         .readme-content td {
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid hsl(var(--border) / 0.6);
           padding: 0.5rem 0.8rem;
           text-align: left;
         }
         .readme-content th {
-          background: rgba(255,255,255,0.03);
+          background: hsl(var(--bg-secondary) / 0.6);
           font-weight: 600;
         }
       `}</style>

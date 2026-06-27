@@ -210,13 +210,13 @@ function ContactForm() {
     return (
       <div className="glass-panel p-4 text-center border-0 animate-float">
         <CheckCircle2 className="text-success mb-3 mx-auto" size={40} />
-        <h5 className="fw-bold text-white mb-2">Message Sent!</h5>
-        <p className="text-white text-opacity-70 mb-0" style={{ fontSize: '13px' }}>
+        <h5 className="fw-bold text-foreground mb-2">Message Sent!</h5>
+        <p className="text-foreground-muted mb-0" style={{ fontSize: '13px' }}>
           Thank you for reaching out. Sagar will get back to you as soon as possible.
         </p>
         <button 
           onClick={() => setSucceeded(false)} 
-          className="btn btn-outline-success btn-sm mt-3 px-3"
+          className="btn btn-custom-outline btn-sm mt-3 px-3"
           style={{ borderRadius: '6px' }}
         >
           Send Another Message
@@ -238,7 +238,7 @@ function ContactForm() {
       )}
 
       <div>
-        <label htmlFor="form-name" className="form-label text-white text-opacity-70 fw-medium" style={{ fontSize: '12px' }}>
+        <label htmlFor="form-name" className="form-label text-foreground-muted fw-medium" style={{ fontSize: '12px' }}>
           Full Name
         </label>
         <input
@@ -249,13 +249,13 @@ function ContactForm() {
           onChange={(e) => setName(e.target.value)}
           placeholder="John Doe"
           disabled={submitting}
-          className="form-control text-white bg-dark bg-opacity-40 border-secondary-subtle py-2 px-3"
-          style={{ fontSize: '13.5px', borderColor: 'rgba(255,255,255,0.1)' }}
+          className="form-control py-2 px-3"
+          style={{ fontSize: '13.5px' }}
         />
       </div>
 
       <div>
-        <label htmlFor="form-email" className="form-label text-white text-opacity-70 fw-medium" style={{ fontSize: '12px' }}>
+        <label htmlFor="form-email" className="form-label text-foreground-muted fw-medium" style={{ fontSize: '12px' }}>
           Email Address <span className="text-danger">*</span>
         </label>
         <input
@@ -267,13 +267,13 @@ function ContactForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="john@example.com"
           disabled={submitting}
-          className="form-control text-white bg-dark bg-opacity-40 border-secondary-subtle py-2 px-3"
-          style={{ fontSize: '13.5px', borderColor: 'rgba(255,255,255,0.1)' }}
+          className="form-control py-2 px-3"
+          style={{ fontSize: '13.5px' }}
         />
       </div>
 
       <div>
-        <label htmlFor="form-message" className="form-label text-white text-opacity-70 fw-medium" style={{ fontSize: '12px' }}>
+        <label htmlFor="form-message" className="form-label text-foreground-muted fw-medium" style={{ fontSize: '12px' }}>
           Message <span className="text-danger">*</span>
         </label>
         <textarea
@@ -285,19 +285,17 @@ function ContactForm() {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Hi Sagar, I would like to discuss..."
           disabled={submitting}
-          className="form-control text-white bg-dark bg-opacity-40 border-secondary-subtle py-2 px-3"
-          style={{ fontSize: '13.5px', borderColor: 'rgba(255,255,255,0.1)', resize: 'vertical' }}
+          className="form-control py-2 px-3"
+          style={{ fontSize: '13.5px', resize: 'vertical' }}
         />
       </div>
 
       <button
         type="submit"
         disabled={submitting}
-        className="btn btn-success py-2.5 w-100 fw-bold text-black border-0 mt-2 d-flex align-items-center justify-content-center gap-2"
+        className="btn btn-gradient py-2.5 w-100 fw-bold mt-2 d-flex align-items-center justify-content-center gap-2"
         style={{
-          background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
-          borderRadius: '8px',
-          boxShadow: '0 8px 20px rgba(16, 185, 129, 0.2)'
+          borderRadius: '8px'
         }}
       >
         {submitting ? (
@@ -370,11 +368,11 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
       <Background3D />
 
       {/* Sticky Navigation Bar */}
-      <nav className="navbar navbar-expand-lg navbar-dark sticky-top glass-panel px-4 py-3 mx-4 mt-3 border-0">
+      <nav className="navbar navbar-expand-lg sticky-top glass-panel px-4 py-3 mx-4 mt-3 border-0">
         <div className="container-fluid p-0">
           <a className="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2" href="#home">
             <span className="text-success fw-extrabold">&lt;</span>
-            <span className="text-white">Sagar</span>
+            <span className="text-foreground">Sagar</span>
             <span className="text-success">Mishra /&gt;</span>
           </a>
           <button 
@@ -390,26 +388,26 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
           <div className={`navbar-collapse justify-content-end ${isNavOpen ? 'd-block' : 'd-none d-lg-flex'}`} id="navbarNav">
             <ul className="navbar-nav gap-2 mt-3 mt-lg-0 align-items-center">
               <li className="nav-item">
-                <a className="nav-link text-white text-opacity-75 hover:text-white px-3" href="#home">Home</a>
+                <a className="nav-link px-3" href="#home">Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-white text-opacity-75 hover:text-white px-3" href="#about">About</a>
+                <a className="nav-link px-3" href="#about">About</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-white text-opacity-75 hover:text-white px-3" href="#projects">Projects</a>
+                <a className="nav-link px-3" href="#projects">Projects</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-white text-opacity-75 hover:text-white px-3" href="#certs">Certifications</a>
+                <a className="nav-link px-3" href="#certs">Certifications</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-white text-opacity-75 hover:text-white px-3" href="#contact">Contact</a>
+                <a className="nav-link px-3" href="#contact">Contact</a>
               </li>
               {/* Theme Toggle Button */}
               <li className="nav-item ms-lg-2">
                 <button
                   onClick={cycleTheme}
-                  className="btn btn-outline-secondary btn-sm px-3 py-2 text-white border-secondary border-opacity-30 hover:border-success d-flex align-items-center gap-1.5"
-                  style={{ borderRadius: '8px', fontSize: '13px' }}
+                  className="btn btn-custom-outline btn-sm px-3 py-2 d-flex align-items-center gap-1.5"
+                  style={{ fontSize: '13px' }}
                   title={`Current Theme: ${theme.toUpperCase()} (Click to toggle)`}
                 >
                   {theme === 'dark' && <Moon size={14} className="text-info" />}
@@ -433,13 +431,13 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
             >
               <ShieldCheck size={14} /> Available for Internships & Projects
             </span>
-            <h1 className="display-4 fw-extrabold text-white mb-2 leading-tight">
+            <h1 className="display-4 fw-extrabold text-foreground mb-2 leading-tight">
               Hi, I am <span className="text-gradient">Sagar Mishra</span>
             </h1>
-            <h3 className="h4 fw-bold text-white text-opacity-80 mb-3">
+            <h3 className="h4 fw-bold text-foreground-muted mb-3">
               MERN Stack Developer | Java & DSA Enthusiast
             </h3>
-            <p className="lead text-white text-opacity-70 mb-4 max-w-lg mx-auto mx-lg-0" style={{ fontSize: '16px', lineHeight: '1.7' }}>
+            <p className="lead text-foreground-muted mb-4 max-w-lg mx-auto mx-lg-0" style={{ fontSize: '16px', lineHeight: '1.7' }}>
               I am a B.Tech Computer Science student at GLA University expected to graduate in 2027. I specialize in building responsive, high-performance web applications using MongoDB, Express, React, and Node.js, combined with strong problem-solving skills in Java and DSA.
             </p>
             
@@ -448,19 +446,14 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                 href="/assets/Sagar_Mishra_Resume_2027_2315001915.pdf" 
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-success d-flex align-items-center gap-2 px-4 py-2.5 text-black fw-bold hover:translate-y-px"
-                style={{
-                  background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
-                  border: 'none',
-                  borderRadius: '8px',
-                  boxShadow: '0 8px 25px rgba(16, 185, 129, 0.25)'
-                }}
+                className="btn btn-gradient d-flex align-items-center gap-2 px-4 py-2.5 fw-bold"
+                style={{ borderRadius: '8px' }}
               >
                 <Eye size={18} /> See Resume
               </a>
               <a 
                 href="#about"
-                className="btn btn-outline-light d-flex align-items-center gap-2 px-4 py-2.5 text-white border-secondary border-opacity-25 hover:bg-white hover:bg-opacity-5"
+                className="btn btn-custom-outline d-flex align-items-center gap-2 px-4 py-2.5"
                 style={{ borderRadius: '8px' }}
               >
                 Explore Skills <ChevronRight size={16} />
@@ -468,11 +461,11 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
             </div>
 
             {/* Social Links */}
-            <div className="d-flex justify-content-center justify-content-lg-start gap-3 mt-4 text-white text-opacity-60">
+            <div className="d-flex justify-content-center justify-content-lg-start gap-3 mt-4 text-foreground-muted">
               <a href="https://github.com/SagarXdev23" target="_blank" rel="noreferrer" className="hover:text-success transition-colors">
                 <GithubIcon size={22} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-success transition-colors">
+              <a href="https://www.linkedin.com/in/sagar-mishra-5035a4280/" target="_blank" rel="noreferrer" className="hover:text-success transition-colors">
                 <LinkedinIcon size={22} />
               </a>
               <a href="mailto:sagar.mishra_cs23@gla.ac.in" className="hover:text-success transition-colors">
@@ -488,11 +481,11 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
       </section>
 
       {/* About & Skills Section */}
-      <section id="about" className="py-5 bg-black bg-opacity-20 border-top border-bottom" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
+      <section id="about" className="py-5 bg-bg-secondary/40 border-top border-bottom border-border-color/30">
         <div className="container py-4">
           <div className="row justify-content-between gy-5">
             <div className="col-lg-5">
-              <h2 className="fw-bold text-white mb-4 d-flex align-items-center gap-2">
+              <h2 className="fw-bold text-foreground mb-4 d-flex align-items-center gap-2">
                 <GraduationCap className="text-success" size={28} /> Education & Focus
               </h2>
               
@@ -500,30 +493,30 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                 {/* University card */}
                 <div className="glass-panel p-4 border-0">
                   <div className="d-flex justify-content-between align-items-start mb-2">
-                    <h5 className="fw-bold text-white mb-0">GLA University, Mathura</h5>
+                    <h5 className="fw-bold text-foreground mb-0">GLA University, Mathura</h5>
                     <span className="badge bg-success bg-opacity-25 text-success border border-success border-opacity-20 px-2.5 py-1">2023 - 2027</span>
                   </div>
-                  <p className="text-white text-opacity-80 fw-medium" style={{ fontSize: '14px' }}>B.Tech in Computer Science & Engineering</p>
-                  <p className="text-white text-opacity-65" style={{ fontSize: '13px' }}>Current CPI: 6.7. Extensive coursework in Data Structures & Algorithms, Object-Oriented Programming (OOPs), DBMS, Operating Systems, and Computer Networks.</p>
+                  <p className="text-foreground/80 fw-medium" style={{ fontSize: '14px' }}>B.Tech in Computer Science & Engineering</p>
+                  <p className="text-foreground-muted" style={{ fontSize: '13px' }}>Current CPI: 6.7. Extensive coursework in Data Structures & Algorithms, Object-Oriented Programming (OOPs), DBMS, Operating Systems, and Computer Networks.</p>
                 </div>
 
                 {/* School card */}
                 <div className="glass-panel p-4 border-0">
                   <div className="d-flex justify-content-between align-items-start mb-2">
-                    <h5 className="fw-bold text-white mb-0">Lucknow Public School</h5>
-                    <span className="badge bg-secondary bg-opacity-25 text-white text-opacity-75 border border-secondary border-opacity-20 px-2.5 py-1">Class XII, 2022</span>
+                    <h5 className="fw-bold text-foreground mb-0">Lucknow Public School</h5>
+                    <span className="badge bg-secondary bg-opacity-25 text-foreground-muted border border-secondary border-opacity-20 px-2.5 py-1">Class XII, 2022</span>
                   </div>
-                  <p className="text-white text-opacity-80 fw-medium" style={{ fontSize: '14px' }}>Intermediate Board Examination</p>
-                  <p className="text-white text-opacity-65" style={{ fontSize: '13px' }}>Completed with a final score of 75% majoring in Science & Mathematics.</p>
+                  <p className="text-foreground/80 fw-medium" style={{ fontSize: '14px' }}>Intermediate Board Examination</p>
+                  <p className="text-foreground-muted" style={{ fontSize: '13px' }}>Completed with a final score of 75% majoring in Science & Mathematics.</p>
                 </div>
               </div>
 
               {/* Achievements */}
               <div className="mt-5">
-                <h4 className="fw-bold text-white mb-3 d-flex align-items-center gap-2">
+                <h4 className="fw-bold text-foreground mb-3 d-flex align-items-center gap-2">
                   <Award className="text-success animate-float" size={22} /> Key Achievements
                 </h4>
-                <ul className="list-unstyled text-white text-opacity-75 d-flex flex-column gap-2" style={{ fontSize: '14px' }}>
+                <ul className="list-unstyled text-foreground-muted d-flex flex-column gap-2" style={{ fontSize: '14px' }}>
                   <li className="d-flex align-items-start gap-2">
                     <span className="text-success fw-bold">✓</span>
                     <span>Led a 5-member developer team to build and launch a live MERN food delivery application.</span>
@@ -545,7 +538,7 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
             </div>
 
             <div className="col-lg-6">
-              <h2 className="fw-bold text-white mb-4 d-flex align-items-center gap-2">
+              <h2 className="fw-bold text-foreground mb-4 d-flex align-items-center gap-2">
                 <Briefcase className="text-success" size={28} /> Core Skills System
               </h2>
               
@@ -555,16 +548,16 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                     <div className="glass-card p-3 h-100 rounded-3 border-0">
                       <div className="d-flex align-items-center gap-2 mb-3">
                         {cat.icon}
-                        <h6 className="m-0 fw-bold text-white">{cat.title}</h6>
+                        <h6 className="m-0 fw-bold text-foreground">{cat.title}</h6>
                       </div>
                       <div className="d-flex flex-wrap gap-2">
                         {cat.skills.map((skill, sIdx) => (
                           <span 
                             key={sIdx} 
-                            className="px-2.5 py-1 rounded text-white text-opacity-80"
+                            className="px-2.5 py-1 rounded text-foreground-muted"
                             style={{ 
-                              background: 'rgba(255, 255, 255, 0.03)',
-                              border: '1px solid rgba(255, 255, 255, 0.05)',
+                              background: 'hsl(var(--bg-secondary) / 0.5)',
+                              border: '1px solid hsl(var(--border) / 0.5)',
                               fontSize: '12px'
                             }}
                           >
@@ -585,10 +578,10 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
       <section id="projects" className="container py-5">
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-5">
           <div>
-            <h2 className="fw-bold text-white m-0 d-flex align-items-center gap-2">
+            <h2 className="fw-bold text-foreground m-0 d-flex align-items-center gap-2">
                 <GithubIcon className="text-success" size={28} /> Projects & Repositories
             </h2>
-            <p className="text-white text-opacity-50 m-0 mt-1" style={{ fontSize: '14px' }}>
+            <p className="text-foreground-muted m-0 mt-1" style={{ fontSize: '14px' }}>
               Fetched in real-time from GitHub. Click on README.md to view detailed project descriptions.
             </p>
           </div>
@@ -601,20 +594,20 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                 placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="form-control text-white bg-dark bg-opacity-40 border-secondary-subtle px-3 py-2 ps-5"
+                className="form-control px-3 py-2 ps-5"
                 style={{ fontSize: '13px', minWidth: '220px', borderRadius: '8px' }}
               />
-              <Search className="position-absolute text-white text-opacity-45 top-50 start-0 translate-middle-y ms-3" size={15} />
+              <Search className="position-absolute text-foreground-muted top-50 start-0 translate-middle-y ms-3" size={15} />
             </div>
 
             <select
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}
-              className="form-select bg-dark bg-opacity-40 border-secondary-subtle text-white px-3 py-2"
+              className="form-select px-3 py-2"
               style={{ fontSize: '13px', width: '130px', borderRadius: '8px' }}
             >
               {languages.map((lang, idx) => (
-                <option key={idx} value={lang} className="bg-dark text-white">{lang}</option>
+                <option key={idx} value={lang}>{lang}</option>
               ))}
             </select>
           </div>
@@ -622,7 +615,7 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
 
         {/* Projects Grid */}
         {filteredRepos.length === 0 ? (
-          <div className="text-center py-5 text-white text-opacity-50 border border-secondary border-opacity-10 rounded-4 glass-panel">
+          <div className="text-center py-5 text-foreground-muted border border-secondary border-opacity-10 rounded-4 glass-panel">
             <p className="mb-0">No projects found matching the criteria.</p>
           </div>
         ) : (
@@ -646,13 +639,13 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
       </section>
 
       {/* Certifications Section */}
-      <section id="certs" className="py-5 bg-black bg-opacity-20 border-top" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
+      <section id="certs" className="py-5 bg-bg-secondary/40 border-top border-border-color/30">
         <div className="container py-4">
           <div className="mb-5">
-            <h2 className="fw-bold text-white m-0 d-flex align-items-center gap-2">
+            <h2 className="fw-bold text-foreground m-0 d-flex align-items-center gap-2">
               <Award className="text-success animate-float" size={28} /> Professional Certifications
             </h2>
-            <p className="text-white text-opacity-50 m-0 mt-1" style={{ fontSize: '14px' }}>
+            <p className="text-foreground-muted m-0 mt-1" style={{ fontSize: '14px' }}>
               Verified credentials and certificates in Cybersecurity, Artificial Intelligence, and Software Engineering.
             </p>
           </div>
@@ -664,7 +657,7 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                   <div className="card-body p-0 d-flex flex-column justify-content-between h-100">
                     <div>
                       <div className="d-flex justify-content-between align-items-start mb-2">
-                        <h6 className="fw-bold text-white text-opacity-95 m-0 lh-base" style={{ fontSize: '15px' }}>
+                        <h6 className="fw-bold text-foreground m-0 lh-base" style={{ fontSize: '15px' }}>
                           {cert.title}
                         </h6>
                         <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-10" style={{ fontSize: '10px' }}>
@@ -678,10 +671,10 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                         {cert.skills.map((skill, sIdx) => (
                           <span 
                             key={sIdx} 
-                            className="px-2 py-0.5 rounded text-white text-opacity-65"
+                            className="px-2 py-0.5 rounded text-foreground-muted"
                             style={{ 
-                              background: 'rgba(255, 255, 255, 0.02)',
-                              border: '1px solid rgba(255, 255, 255, 0.03)',
+                              background: 'hsl(var(--bg-secondary) / 0.5)',
+                              border: '1px solid hsl(var(--border) / 0.5)',
                               fontSize: '10px'
                             }}
                           >
@@ -696,12 +689,10 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
                         href={`/assets/${cert.filename}`} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="btn btn-sm btn-success text-black fw-bold d-flex align-items-center justify-content-center gap-1.5 w-100 py-2.5"
+                        className="btn btn-sm btn-gradient fw-bold d-flex align-items-center justify-content-center gap-1.5 w-100 py-2.5"
                         style={{
                           fontSize: '12px',
-                          borderRadius: '8px',
-                          background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
-                          border: 'none'
+                          borderRadius: '8px'
                         }}
                       >
                         <Eye size={14} /> View Certificate
@@ -716,14 +707,14 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-5 bg-black bg-opacity-20 border-top" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
+      <section id="contact" className="py-5 bg-bg-secondary/40 border-top border-border-color/30">
         <div className="container py-4">
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center mb-5">
-              <h2 className="fw-bold text-white mb-2 d-flex align-items-center justify-content-center gap-2">
+              <h2 className="fw-bold text-foreground mb-2 d-flex align-items-center justify-content-center gap-2">
                 <Mail className="text-success" size={28} /> Get In Touch
               </h2>
-              <p className="text-white text-opacity-50 m-0" style={{ fontSize: '14px' }}>
+              <p className="text-foreground-muted m-0" style={{ fontSize: '14px' }}>
                 Have an internship opportunity, a project request, or a general question? Fill out the form below.
               </p>
             </div>
@@ -736,25 +727,25 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
       </section>
 
       {/* Footer */}
-      <footer className="py-5 border-top" style={{ borderColor: 'rgba(255,255,255,0.04)', background: 'rgba(3, 4, 9, 0.8)' }}>
+      <footer className="py-5 border-top border-border-color/30" style={{ background: 'hsl(var(--bg-secondary) / 0.8)' }}>
         <div className="container">
           <div className="row gy-4 align-items-center">
             <div className="col-md-6 text-center text-md-start">
               <h5 className="fw-bold text-success mb-2 text-gradient">Made with curiosity with deep interest.</h5>
-              <p className="text-white text-opacity-60 m-0" style={{ fontSize: '13.5px' }}>
+              <p className="text-foreground-muted m-0" style={{ fontSize: '13.5px' }}>
                 Thank you for visiting my Portfolio Website.
               </p>
-              <p className="text-white text-opacity-35 m-0 mt-2" style={{ fontSize: '11px' }}>
+              <p className="text-foreground-muted/60 m-0 mt-2" style={{ fontSize: '11px' }}>
                 © {new Date().getFullYear()} Sagar Mishra. Built with Next.js, Tailwind CSS v4, Bootstrap, and HTML5/CSS3.
               </p>
             </div>
             <div className="col-md-6 text-center text-md-end">
-              <div className="d-flex justify-content-center justify-content-md-end gap-3 text-white text-opacity-50">
-                <a href="#home" className="hover:text-white" style={{ fontSize: '13px' }}>Home</a>
-                <a href="#about" className="hover:text-white" style={{ fontSize: '13px' }}>About</a>
-                <a href="#projects" className="hover:text-white" style={{ fontSize: '13px' }}>Projects</a>
-                <a href="#certs" className="hover:text-white" style={{ fontSize: '13px' }}>Certifications</a>
-                <a href="#contact" className="hover:text-white" style={{ fontSize: '13px' }}>Contact</a>
+              <div className="d-flex justify-content-center justify-content-md-end gap-3 text-foreground-muted">
+                <a href="#home" className="hover:text-primary" style={{ fontSize: '13px' }}>Home</a>
+                <a href="#about" className="hover:text-primary" style={{ fontSize: '13px' }}>About</a>
+                <a href="#projects" className="hover:text-primary" style={{ fontSize: '13px' }}>Projects</a>
+                <a href="#certs" className="hover:text-primary" style={{ fontSize: '13px' }}>Certifications</a>
+                <a href="#contact" className="hover:text-primary" style={{ fontSize: '13px' }}>Contact</a>
               </div>
             </div>
           </div>

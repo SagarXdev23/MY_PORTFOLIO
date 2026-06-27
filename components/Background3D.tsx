@@ -61,7 +61,7 @@ export default function Background3D() {
     const animate = () => {
       // Clear canvas - adapting to theme
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      ctx.fillStyle = currentTheme === 'light' ? 'rgba(240, 244, 248, 0.15)' : 'rgba(4, 6, 15, 0.15)';
+      ctx.fillStyle = currentTheme === 'light' ? 'rgba(249, 246, 241, 0.15)' : 'rgba(5, 7, 15, 0.15)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Smooth mouse tracking (lerp)

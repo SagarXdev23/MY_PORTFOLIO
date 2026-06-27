@@ -148,13 +148,7 @@ export default function AIAssistant() {
           }}
         >
           {/* Header */}
-          <div 
-            className="d-flex align-items-center justify-content-between px-3 py-3 border-bottom"
-            style={{
-              background: 'rgba(13, 20, 38, 0.7)',
-              borderColor: 'rgba(255, 255, 255, 0.08)'
-            }}
-          >
+          <div className="d-flex align-items-center justify-content-between px-3 py-3 border-bottom ai-chat-header">
             <div className="d-flex align-items-center gap-2">
               <div 
                 className="d-flex align-items-center justify-content-center bg-success bg-opacity-20 text-success rounded-circle"
@@ -171,17 +165,15 @@ export default function AIAssistant() {
             </div>
             <button 
               onClick={toggleChat}
-              className="btn btn-sm btn-link text-white text-opacity-50 hover:text-white p-0 border-0"
+              className="btn btn-sm btn-custom-outline border-0 p-1 d-flex align-items-center justify-content-center"
+              style={{ borderRadius: '50%' }}
             >
               <X size={20} />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div 
-            className="flex-grow-1 p-3 overflow-y-auto d-flex flex-column gap-3"
-            style={{ background: 'rgba(5, 7, 18, 0.3)' }}
-          >
+          <div className="flex-grow-1 p-3 overflow-y-auto d-flex flex-column gap-3 ai-chat-body">
             {messages.map((msg, index) => (
               <div 
                 key={index}
@@ -199,13 +191,8 @@ export default function AIAssistant() {
                   {msg.role === 'user' ? <User size={14} /> : <Bot size={14} />}
                 </div>
                 <div 
-                  className="px-3 py-2 rounded-3 text-white text-opacity-95"
+                  className={`px-3 py-2 rounded-3 ${msg.role === 'user' ? 'ai-chat-user-msg' : 'ai-chat-assistant-msg'}`}
                   style={{
-                    background: msg.role === 'user' 
-                      ? 'linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%)' 
-                      : 'rgba(13, 20, 38, 0.8)',
-                    border: '1px solid',
-                    borderColor: msg.role === 'user' ? 'rgba(6, 182, 212, 0.25)' : 'rgba(255, 255, 255, 0.05)',
                     fontSize: '13px',
                     lineHeight: '1.5',
                     whiteSpace: 'pre-wrap'
@@ -225,8 +212,8 @@ export default function AIAssistant() {
                   <Bot size={14} />
                 </div>
                 <div 
-                  className="px-3 py-2 rounded-3"
-                  style={{ background: 'rgba(13, 20, 38, 0.8)', border: '1px solid rgba(255, 255, 255, 0.05)' }}
+                  className="px-3 py-2 rounded-3 ai-chat-assistant-msg"
+                  style={{ fontSize: '13px' }}
                 >
                   <div className="d-flex gap-1 align-items-center py-1">
                     <span className="spinner-grow spinner-grow-sm text-success" style={{ width: '6px', height: '6px', animationDelay: '0s' }} />
@@ -242,9 +229,8 @@ export default function AIAssistant() {
           {/* Suggestions List (only shown when not loading and input is empty) */}
           {!isLoading && inputValue.trim() === '' && (
             <div 
-              className="px-3 py-2 overflow-x-auto d-flex gap-2"
+              className="px-3 py-2 overflow-x-auto d-flex gap-2 ai-chat-suggestions"
               style={{
-                background: 'rgba(5, 7, 18, 0.5)',
                 whiteSpace: 'nowrap',
                 scrollbarWidth: 'none', // Hide scrollbar for clean carousel look
                 msOverflowStyle: 'none'
@@ -254,20 +240,9 @@ export default function AIAssistant() {
                 <button
                   key={i}
                   onClick={() => handleSendMessage(sug)}
-                  className="btn btn-sm text-white text-opacity-80 py-1 px-2 border rounded-pill"
+                  className="btn btn-sm ai-chat-suggest-btn py-1 px-2 rounded-pill"
                   style={{
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    fontSize: '11px',
-                    transition: 'all 0.2s'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'hsl(var(--primary))';
-                    e.currentTarget.style.color = '#10b981';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    fontSize: '11px'
                   }}
                 >
                   {sug}
@@ -277,37 +252,26 @@ export default function AIAssistant() {
           )}
 
           {/* Footer Input form */}
-          <form 
-            onSubmit={handleFormSubmit}
-            className="p-3 border-top d-flex gap-2"
-            style={{
-              background: 'rgba(13, 20, 38, 0.9)',
-              borderColor: 'rgba(255, 255, 255, 0.08)'
-            }}
-          >
+          <form className="p-3 border-top d-flex gap-2 ai-chat-footer" onSubmit={handleFormSubmit}>
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask me something about Sagar..."
               disabled={isLoading}
-              className="form-control text-white bg-dark bg-opacity-40 border-secondary-subtle"
+              className="form-control"
               style={{
-                fontSize: '13px',
-                borderColor: 'rgba(255, 255, 255, 0.15)',
-                color: '#fff'
+                fontSize: '13px'
               }}
             />
             <button
               type="submit"
               disabled={isLoading || !inputValue.trim()}
-              className="btn btn-success d-flex align-items-center justify-content-center"
+              className="btn btn-gradient d-flex align-items-center justify-content-center"
               style={{
                 width: '40px',
                 height: '38px',
-                background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
-                border: 'none',
-                boxShadow: '0 4px 15px rgba(16, 185, 129, 0.2)'
+                borderRadius: '8px'
               }}
             >
               <Send size={15} />
