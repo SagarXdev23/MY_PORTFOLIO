@@ -1,0 +1,7 @@
+[
+  {
+    "timestamp": "2026-06-27T09:10:22.828Z",
+    "user": "What certifications does Sagar hold?",
+    "bot": "Hi there! I am Sagar's AI assistant. \nCurrently, the DeepSeek API Key is not configured in the environment variables, so I am running in static-helper mode. \n\nSagar Mishra is a MERN Stack Developer, Java coder, and DSA specialist currently pursuing B.Tech in Computer Science at GLA University. \nHe has built impressive full-stack projects:\n1. **QuickBite** - A food delivery app with role-based JWT auth and Stripe payments.\n2. **SmartScribe** - An AI-powered study assistant using OpenAI for summaries and quizzes.\n3. **ChatWave** - A real-time chat application powered by Socket.io.\n\nHe holds certifications in **Google Generative AI**, **Google Cybersecurity**, and **NPTEL Software Engineering**.\nFeel free to contact him at **sagar.mishra_cs23@gla.ac.in** or view his repositories directly on this site!"
+  }
+]
