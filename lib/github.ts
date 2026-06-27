@@ -6,13 +6,21 @@ let githubToken: string | null = null;
 // Read token from assets/key.txt
 async function getGithubToken(): Promise<string> {
   if (githubToken) return githubToken;
+  
+  // Check environment variable first (preferred for production/Render)
+  if (process.env.GITHUB_TOKEN) {
+    githubToken = process.env.GITHUB_TOKEN.trim();
+    return githubToken;
+  }
+
+  // Fallback to local key.txt file
   try {
     const keyPath = path.join(process.cwd(), 'assets', 'key.txt');
     const content = await fs.readFile(keyPath, 'utf-8');
     githubToken = content.trim();
     return githubToken;
   } catch (error) {
-    console.error('Error reading GitHub token:', error);
+    // Only log if no token is available at all
     return '';
   }
 }
