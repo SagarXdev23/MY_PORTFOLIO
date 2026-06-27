@@ -174,17 +174,21 @@ function ContactForm() {
     setError(null);
 
     try {
-      const response = await fetch('/api/contact', {
+      // Direct client-side POST to Formspree — no server, no filesystem issues
+      const response = await fetch('https://formspree.io/f/mbdvoezg', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
-          name: name,
-          email: email,
-          message: message
+          name: name || 'Anonymous',
+          email,
+          message
         })
       });
+
+      const data = await response.json();
 
       if (response.ok) {
         setSucceeded(true);
@@ -192,7 +196,6 @@ function ContactForm() {
         setEmail('');
         setMessage('');
       } else {
-        const data = await response.json();
         if (data.errors) {
           setError(data.errors.map((err: any) => err.message).join(', '));
         } else {
@@ -205,6 +208,7 @@ function ContactForm() {
       setSubmitting(false);
     }
   };
+
 
   if (succeeded) {
     return (
