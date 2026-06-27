@@ -10,28 +10,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: 'Email and message are required' }, { status: 400 });
     }
 
-    // 1. Log contact query locally for secure Admin Panel access
-    const dataDir = path.join(process.cwd(), 'data');
-    await fs.mkdir(dataDir, { recursive: true });
-    const logPath = path.join(dataDir, 'contact_logs.json');
-    
-    let logs: any[] = [];
+    // 1. Log contact query locally (only works in local dev; Netlify has read-only filesystem)
     try {
-      const data = await fs.readFile(logPath, 'utf-8');
-      logs = JSON.parse(data);
-    } catch (e) {
-      // File doesn't exist yet, proceed with empty logs
+      const dataDir = path.join(process.cwd(), 'data');
+      await fs.mkdir(dataDir, { recursive: true });
+      const logPath = path.join(dataDir, 'contact_logs.json');
+      
+      let logs: any[] = [];
+      try {
+        const data = await fs.readFile(logPath, 'utf-8');
+        logs = JSON.parse(data);
+      } catch (e) {
+        // File doesn't exist yet, proceed with empty logs
+      }
+      
+      const newLog = {
+        timestamp: new Date().toISOString(),
+        name: name || 'Anonymous',
+        email,
+        message
+      };
+      
+      logs.unshift(newLog);
+      await fs.writeFile(logPath, JSON.stringify(logs, null, 2), 'utf-8');
+    } catch (fsErr) {
+      // Filesystem is read-only in production (Netlify/Vercel) — skip silently
+      console.warn('Local contact log write skipped (read-only filesystem):', fsErr);
     }
-    
-    const newLog = {
-      timestamp: new Date().toISOString(),
-      name: name || 'Anonymous',
-      email,
-      message
-    };
-    
-    logs.unshift(newLog); // Put new query at the top
-    await fs.writeFile(logPath, JSON.stringify(logs, null, 2), 'utf-8');
 
     // 2. Dispatch/Forward to Formspree email receiver endpoint
     try {
