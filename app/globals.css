@@ -46,11 +46,23 @@
   color: hsl(var(--primary)) !important; /* Professional dark forest green headings */
 }
 
+/* Ensure card headings are always readable in dark mode */
+:root h5,
+:root h6 {
+  color: hsl(var(--foreground)) !important;
+}
+
+[data-theme="light"] .glass-card h5,
+[data-theme="light"] .glass-card h6 {
+  color: hsl(var(--primary)) !important;
+}
+
 @theme inline {
   --color-bg-primary: hsl(var(--bg-primary));
   --color-bg-secondary: hsl(var(--bg-secondary));
   --color-bg-tertiary: hsl(var(--bg-tertiary));
   
+  --color-foreground: hsl(var(--foreground));
   --color-foreground-muted: hsl(var(--foreground-muted));
   --color-primary-color: hsl(var(--primary));
   --color-accent-color: hsl(var(--accent));
