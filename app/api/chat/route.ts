@@ -92,7 +92,72 @@ async function logMessage(userMessage: string, botResponse: string) {
   }
 }
 
+// Static fallback responses if the DeepSeek API is offline or has insufficient balance
+function getStaticFallbackResponse(userMessage: string): string {
+  const query = userMessage.toLowerCase();
+  
+  if (query.includes('project') || query.includes('build') || query.includes('quickbite') || query.includes('smartscribe') || query.includes('chatwave')) {
+    return `Sagar has built several notable full-stack applications:
+
+1. **QuickBite** — Food Delivery App (MERN + Stripe)
+   - Built 10+ REST APIs for JWT authentication, orders, and Stripe payment gateway.
+   - Implemented role-based JWT auth (Customer, Admin, Owner) and integrated Stripe webhooks.
+2. **SmartScribe** — AI Study Assistant (MERN + OpenAI API)
+   - Integrated OpenAI API to generate summaries, quizzes, and flashcards from user notes.
+3. **ChatWave** — Real-Time Chat App (MERN + Socket.io)
+   - Developed real-time group chat with typing indicators and persistent MongoDB chat history.
+
+You can inspect the source code and details of these projects in the "Projects" section of this website!`;
+  }
+  
+  if (query.includes('skill') || query.includes('tech') || query.includes('language') || query.includes('java') || query.includes('javascript') || query.includes('python')) {
+    return `Sagar's technical skills include:
+
+- **Programming Languages**: Java, JavaScript, Python
+- **Frontend Development**: React.js, Redux Toolkit, HTML5, CSS3, Tailwind CSS, Bootstrap
+- **Backend & Database**: Node.js, Express.js, MongoDB, MySQL, REST APIs, JWT, Socket.io
+- **Developer Tools**: Git, GitHub, VS Code, IntelliJ IDEA
+- **DSA Profile**: Solved 100+ LeetCode problems (Arrays, Dynamic Programming, Trees, sliding window).`;
+  }
+  
+  if (query.includes('cert') || query.includes('award') || query.includes('hackerrank') || query.includes('google')) {
+    return `Sagar holds several professional certifications:
+
+1. **Google Generative AI Course Certification** (Generative AI fundamentals, prompt engineering)
+2. **Google Cybersecurity Professional Certificate** (Security frameworks, network security, incident response)
+3. **NPTEL Software Engineering Certification** from IIT Kharagpur (scored 65%)
+4. **HackerRank Certified 5-Star Java Developer**`;
+  }
+
+  if (query.includes('contact') || query.includes('email') || query.includes('reach') || query.includes('mail') || query.includes('phone') || query.includes('connect')) {
+    return `You can reach out to Sagar directly via:
+- **Email**: sagar.mishra_cs23@gla.ac.in
+- **GitHub**: https://github.com/SagarXdev23
+- **LinkedIn**: https://linkedin.com (Refer to his resume for the direct link)`;
+  }
+  
+  if (query.includes('education') || query.includes('gla') || query.includes('college') || query.includes('university') || query.includes('degree')) {
+    return `Sagar is currently pursuing:
+- **B.Tech in Computer Science** at **GLA University, Mathura** (Expected graduation: June 2027) | Current CPI: 6.7
+- Coursework: Data Structures & Algorithms, Object-Oriented Programming (OOPs), DBMS, Operating Systems, Computer Networks.
+- Schooling: Intermediate from **Lucknow Public School, Lucknow** (Class XII, May 2022) | Score: 75%`;
+  }
+
+  return `Hello! I am Sagar's AI assistant. 
+
+Sagar Mishra is a B.Tech Computer Science student at GLA University, Lucknow, specializing in MERN Stack Development, Java, and Data Structures & Algorithms. 
+
+Feel free to ask me about:
+- 💻 His **technical skills** (Java, JavaScript, React, Node.js, MongoDB)
+- 🚀 His **key projects** (QuickBite, SmartScribe, ChatWave)
+- 🎓 His **education** or **certifications** (Google Cybersecurity, Google GenAI, NPTEL)
+- ✉️ How to **contact** him (sagar.mishra_cs23@gla.ac.in)
+
+*(Note: My online AI engine is currently resting, so I am answering using my built-in profile database!)*`;
+}
+
 export async function POST(request: Request) {
+  let lastUserMessage = '';
   try {
     const { messages } = await ioParseBody(request);
     
@@ -100,23 +165,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Messages are required and must be an array' }, { status: 400 });
     }
 
-    const lastUserMessage = messages[messages.length - 1]?.content || '';
+    lastUserMessage = messages[messages.length - 1]?.content || '';
     const apiKey = process.env.DEEPSEEK_API_KEY;
 
     // Fallback response if no DeepSeek API key is configured
     if (!apiKey) {
-      const fallbackResponse = `Hi there! I am Sagar's AI assistant. 
-Currently, the DeepSeek API Key is not configured in the environment variables, so I am running in static-helper mode. 
-
-Sagar Mishra is a MERN Stack Developer, Java coder, and DSA specialist currently pursuing B.Tech in Computer Science at GLA University. 
-He has built impressive full-stack projects:
-1. **QuickBite** - A food delivery app with role-based JWT auth and Stripe payments.
-2. **SmartScribe** - An AI-powered study assistant using OpenAI for summaries and quizzes.
-3. **ChatWave** - A real-time chat application powered by Socket.io.
-
-He holds certifications in **Google Generative AI**, **Google Cybersecurity**, and **NPTEL Software Engineering**.
-Feel free to contact him at **sagar.mishra_cs23@gla.ac.in** or view his repositories directly on this site!`;
-
+      const fallbackResponse = getStaticFallbackResponse(lastUserMessage);
       await logMessage(lastUserMessage, fallbackResponse);
       return NextResponse.json({ message: fallbackResponse });
     }
@@ -145,7 +199,11 @@ Feel free to contact him at **sagar.mishra_cs23@gla.ac.in** or view his reposito
     if (!response.ok) {
       const errText = await response.text();
       console.error('DeepSeek API error response:', errText);
-      throw new Error(`DeepSeek API error: ${response.statusText}`);
+      
+      // Fallback to static assistant responses if API fails/has insufficient balance
+      const fallbackResponse = getStaticFallbackResponse(lastUserMessage);
+      await logMessage(lastUserMessage, fallbackResponse);
+      return NextResponse.json({ message: fallbackResponse });
     }
 
     const json = await response.json();
@@ -155,10 +213,14 @@ Feel free to contact him at **sagar.mishra_cs23@gla.ac.in** or view his reposito
     return NextResponse.json({ message: botResponse });
   } catch (error: any) {
     console.error('AI Assistant API error:', error);
-    return NextResponse.json(
-      { error: error.message || 'Failed to generate response' },
-      { status: 500 }
-    );
+    
+    // Safety fallback responder
+    const fallbackResponse = getStaticFallbackResponse(lastUserMessage);
+    try {
+      await logMessage(lastUserMessage, fallbackResponse);
+    } catch (e) {}
+    
+    return NextResponse.json({ message: fallbackResponse });
   }
 }
 
