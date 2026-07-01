@@ -447,7 +447,7 @@ export default function PortfolioClient({ repos, profile }: PortfolioClientProps
             
             <div className="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
               <a 
-                href="/assets/Sagar_Mishra_Resume_2027_2315001915.pdf" 
+                href="/assets/Sagar_Mishra_Resume_2315001915_2027_Batchh.pdf" 
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-gradient d-flex align-items-center gap-2 px-4 py-2.5 fw-bold"
